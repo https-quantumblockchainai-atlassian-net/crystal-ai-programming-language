@@ -13,11 +13,11 @@ env:
 
 jobs:
   x86_64-mingw-w64-build:
-    runs-on: windows-2022
+    runs-on: windows-2025
     steps:
       - name: Setup MSYS2
         id: msys2
-        uses: msys2/setup-msys2@d44ca8e88d8b43d56cf5670f91747359d5537f97 # v2.26.0
+        uses: msys2/setup-msys2@66cd2cce69caa17b53920067426061ca1de3a884 # v2.32.0
         with:
           msystem: UCRT64
           update: true
@@ -33,7 +33,7 @@ jobs:
           git config --global core.autocrlf false
 
       - name: Download Crystal source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Build Crystal
         shell: msys2 {0}
@@ -44,7 +44,7 @@ jobs:
         run: make install install_dlls deref_symlinks=1 PREFIX="$(pwd)/crystal"
 
       - name: Download shards release
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: crystal-lang/shards
           ref: v0.19.1
@@ -64,17 +64,17 @@ jobs:
           ldd bin/shards.exe | grep -iv ' => /c/windows/system32' | sed 's/.* => //; s/ (.*//' | xargs -t -i /usr/bin/install -m 0755 '{}' "$(pwd)/../crystal/bin/"
 
       - name: Upload Crystal executable
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: x86_64-mingw-w64-crystal
           path: crystal
 
   x86_64-mingw-w64-test-stdlib:
-    runs-on: windows-2022
+    runs-on: windows-2025
     steps:
       - name: Setup MSYS2
         id: msys2
-        uses: msys2/setup-msys2@d44ca8e88d8b43d56cf5670f91747359d5537f97 # v2.26.0
+        uses: msys2/setup-msys2@66cd2cce69caa17b53920067426061ca1de3a884 # v2.32.0
         with:
           msystem: UCRT64
           update: true
@@ -90,7 +90,7 @@ jobs:
           git config --global core.autocrlf false
 
       - name: Download Crystal source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Run stdlib specs
         shell: msys2 {0}
@@ -99,11 +99,11 @@ jobs:
           make std_spec
 
   x86_64-mingw-w64-test-compiler:
-    runs-on: windows-2022
+    runs-on: windows-2025
     steps:
       - name: Setup MSYS2
         id: msys2
-        uses: msys2/setup-msys2@d44ca8e88d8b43d56cf5670f91747359d5537f97 # v2.26.0
+        uses: msys2/setup-msys2@66cd2cce69caa17b53920067426061ca1de3a884 # v2.32.0
         with:
           msystem: UCRT64
           update: true
@@ -119,7 +119,7 @@ jobs:
           git config --global core.autocrlf false
 
       - name: Download Crystal source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Run compiler specs
         shell: msys2 {0}
