@@ -34,7 +34,7 @@ jobs:
           - crystal_bootstrap_version: 1.15.1 # LATEST RELEASE
     steps:
       - name: Download Crystal source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Prepare System
         run: bin/ci prepare_system
@@ -52,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download Crystal source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Prepare System
         run: bin/ci prepare_system
@@ -70,7 +70,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download Crystal source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Prepare System
         run: bin/ci prepare_system
@@ -91,7 +91,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download Crystal source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Prepare System
         run: bin/ci prepare_system
